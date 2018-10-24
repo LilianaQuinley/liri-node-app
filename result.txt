@@ -1,0 +1,36 @@
+this is loaded
+[ '/usr/local/bin/node',
+  '/Users/user/Desktop/liri-node-app/liri.js',
+  'shakira' ]
+The movie's rating is: 7.8
+The artist is: undefined
+The song's name is: undefined
+A preview link of the song from Spotify: undefined
+The album that the song is from undefined
+First time getting artist info for shakira
+This is the body parsed
+No pare la fiesta
+     Estadio Velez
+     Buenos Aires
+     2018-10-25T19:00:46
+
+No pare la fiesta
+     Estadio Rosario Central
+     Rosario
+     2018-10-27T19:00:22
+
+No pare la fiesta
+     Estadio Nacional
+     Región Metropolitana
+     2018-10-30T19:00:48
+
+No pare la fiesta
+     Estadio Alberto Spencer
+     Guayaquil
+     2018-11-01T19:00:30
+
+No pare la fiesta
+     Parque Simón Bolívar
+     Bogota
+     2018-11-03T19:00:16
+
