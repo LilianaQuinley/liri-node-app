@@ -1,7 +1,7 @@
 
+var fs = require('fs')
 var config = require("dotenv").config();
 var keys = require("./keys")
-
 var request = require("request");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
@@ -26,6 +26,7 @@ switch(command){
     break;
 
     case 'do-what-it-says':
+    random()
     break;
 
 }
@@ -67,8 +68,8 @@ function music() {
     }
     else{
     var songInfo = data.tracks.items[0];
-    console.log("the Artist is: " + songInfo.artists[0].name)
-    console.log("the name of the song is: " + songInfo.name)
+    console.log("The Artist is: " + songInfo.artists[0].name)
+    console.log("The name of the song is: " + songInfo.name)
     console.log("The album that the song is from: " + songInfo.album.name)
     console.log("A preview link of the song: " + songInfo.preview_url)
 
@@ -104,3 +105,42 @@ function music() {
     }
   });
 }
+
+// If the "random" function is called...
+function random() {
+
+  fs.readFile("random.txt","utf8",function(err,data) {
+    if (err){
+        return console.log(error);
+    } 
+    console.log(data)
+
+    var dataArr = data.split(",");
+
+    console.log(dataArr);
+    command = dataArr[0];
+    selection = dataArr[1];
+    console.log(command)
+    console.log(selection)
+
+    switch(command){
+    
+      case "concert-this":
+      concert();
+      break;
+  
+      case 'movie-this':
+      movies()
+      break;
+  
+      case 'spotify-this-song':
+      music()
+      break;
+  
+  }
+
+
+});
+
+}
+
