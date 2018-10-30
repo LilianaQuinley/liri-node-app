@@ -1,8 +1,10 @@
 
 var config = require("dotenv").config();
 var keys = require("./keys")
-//var spotify = new Spotify(keys.spotify);
+
 var request = require("request");
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
 console.log(process.argv)
 
 
@@ -20,7 +22,7 @@ switch(command){
     break;
 
     case 'spotify-this-song':
-   // music()
+    music()
     break;
 
     case 'do-what-it-says':
@@ -54,26 +56,27 @@ function concert() {
   });
 }
 // If the "music" function is called...
+
 function music() {
 
-// Then run a request to search the spotify API 
-  request("https://rest.bandsintown.com/artists/" + selection + "/events?app_id=codingbootcamp", function(error, response, body) {
-
-    // If the request is successful (i.e. if the response status code is 200)
-    if (!error && response.statusCode === 200) {
-
-      // Parse the body of the site and recover just the imdbRating
-      // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-      console.log("The song's name: " + JSON.parse(body).songName);
-      console.log("A preview link of the song from Spotify: " + JSON.parse(body).date);
-      console.log("The album that the song is from " + JSON.parse(body).date);
-      
-    } else {
-      console.log("The Sign " + JSON.parse(body).date);
-    
+// // Then run a request to search the spotify API 
+  spotify.search({ type: 'track', query: selection }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;  //from spotify npm docs
     }
+    else{
+    var songInfo = data.tracks.items[0];
+    console.log("the Artist is: " + songInfo.artists[0].name)
+    console.log("the name of the song is: " + songInfo.name)
+    console.log("The album that the song is from: " + songInfo.album.name)
+    console.log("A preview link of the song: " + songInfo.preview_url)
+
+    };
   });
-}
+}  
+
+
   // If the "movie" function is called...
   function movies() {
 
